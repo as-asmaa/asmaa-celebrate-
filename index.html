@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eid Al-Adha Mubarak</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+–pink:       #f9c8d8;
+–pink-dark:  #d4789a;
+–pink-mid:   #e8a0b8;
+–bg:         #fce8ef;
+–black:      #1a0a10;
+}
+
+body {
+min-height: 100vh;
+background: linear-gradient(145deg, #fce8ef 0%, #fbd4e2 50%, #f9c8d8 100%);
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: ‘Cormorant Garamond’, serif;
+overflow: hidden;
+position: relative;
+}
+
+/* subtle floating petals */
+.petals {
+position: fixed;
+inset: 0;
+pointer-events: none;
+overflow: hidden;
+}
+.petals span {
+position: absolute;
+border-radius: 50% 0 50% 0;
+background: rgba(212,120,154,0.15);
+animation: drift var(–d) ease-in-out infinite alternate;
+opacity: 0;
+}
+@keyframes drift {
+from { opacity: 0; transform: translateY(0) rotate(0deg); }
+to   { opacity: var(–o); transform: translateY(-20px) rotate(180deg); }
+}
+
+/* glow */
+.glow {
+position: fixed;
+inset: 0;
+background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(255,255,255,0.5) 0%, transparent 70%);
+pointer-events: none;
+}
+
+/* card */
+.card {
+position: relative;
+text-align: center;
+padding: 4rem 3rem 3.5rem;
+max-width: 480px;
+width: 90%;
+background: rgba(255,255,255,0.35);
+backdrop-filter: blur(8px);
+-webkit-backdrop-filter: blur(8px);
+border-radius: 4px;
+opacity: 0;
+transform: translateY(24px);
+animation: rise 1.4s cubic-bezier(.22,.9,.36,1) 0.3s forwards;
+}
+
+@keyframes rise {
+to { opacity: 1; transform: translateY(0); }
+}
+
+.card::before {
+content: ‘’;
+position: absolute;
+inset: 0;
+border: 1px solid rgba(212,120,154,0.35);
+border-radius: 4px;
+pointer-events: none;
+}
+.card::after {
+content: ‘’;
+position: absolute;
+inset: 8px;
+border: 1px solid rgba(212,120,154,0.15);
+border-radius: 2px;
+pointer-events: none;
+}
+
+.corners span {
+position: absolute;
+width: 18px;
+height: 18px;
+border-color: var(–pink-dark);
+border-style: solid;
+opacity: 0.5;
+}
+.corners span:nth-child(1) { top: 0; left: 0; border-width: 1px 0 0 1px; }
+.corners span:nth-child(2) { top: 0; right: 0; border-width: 1px 1px 0 0; }
+.corners span:nth-child(3) { bottom: 0; left: 0; border-width: 0 0 1px 1px; }
+.corners span:nth-child(4) { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+
+.moon {
+font-size: 2.2rem;
+display: block;
+margin-bottom: 1.8rem;
+animation: float 4s ease-in-out infinite;
+filter: drop-shadow(0 0 8px rgba(212,120,154,0.4));
+}
+@keyframes float {
+0%, 100% { transform: translateY(0); }
+50%       { transform: translateY(-6px); }
+}
+
+h1 {
+font-family: ‘Cinzel’, serif;
+font-size: clamp(1.4rem, 5vw, 2rem);
+font-weight: 600;
+letter-spacing: 0.25em;
+color: var(–black);
+text-transform: uppercase;
+margin-bottom: 0.3rem;
+}
+
+h2 {
+font-family: ‘Cinzel’, serif;
+font-size: clamp(2rem, 8vw, 3.2rem);
+font-weight: 400;
+color: var(–pink-dark);
+letter-spacing: 0.15em;
+margin-bottom: 2rem;
+text-shadow: 0 2px 12px rgba(212,120,154,0.25);
+}
+
+.byname {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 0.85rem;
+font-style: italic;
+letter-spacing: 0.2em;
+color: var(–pink-dark);
+margin-top: 0.5rem;
+}
+
+.divider {
+display: flex;
+align-items: center;
+gap: 12px;
+margin: 0 auto 2rem;
+width: fit-content;
+}
+.divider::before, .divider::after {
+content: ‘’;
+display: block;
+width: 60px;
+height: 1px;
+background: linear-gradient(to right, transparent, rgba(212,120,154,0.5));
+}
+.divider::after {
+background: linear-gradient(to left, transparent, rgba(212,120,154,0.5));
+}
+.divider span { color: var(–pink-dark); font-size: 0.7rem; }
+
+p {
+font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+color: rgba(26,10,16,0.75);
+line-height: 1.9;
+font-style: italic;
+font-weight: 300;
+margin-bottom: 2rem;
+}
+
+.tags {
+display: flex;
+justify-content: center;
+gap: 1.5rem;
+flex-wrap: wrap;
+margin-bottom: 2.2rem;
+}
+.tags span {
+font-family: ‘Cinzel’, serif;
+font-size: 0.62rem;
+letter-spacing: 0.2em;
+color: var(–pink-dark);
+text-transform: uppercase;
+}
+
+.btn {
+display: inline-block;
+padding: 0.75rem 2.5rem;
+border: 1px solid rgba(212,120,154,0.5);
+color: var(–black);
+font-family: ‘Cinzel’, serif;
+font-size: 0.75rem;
+letter-spacing: 0.25em;
+text-transform: uppercase;
+cursor: pointer;
+background: transparent;
+transition: all 0.35s ease;
+margin-bottom: 2.5rem;
+position: relative;
+overflow: hidden;
+}
+.btn::before {
+content: ‘’;
+position: absolute;
+inset: 0;
+background: rgba(212,120,154,0.12);
+transform: scaleX(0);
+transform-origin: left;
+transition: transform 0.35s ease;
+}
+.btn:hover::before { transform: scaleX(1); }
+.btn:hover { border-color: var(–pink-dark); }
+.btn:active { transform: scale(0.97); }
+
+.closing {
+font-family: ‘Cinzel’, serif;
+font-size: 0.7rem;
+letter-spacing: 0.25em;
+color: rgba(212,120,154,0.7);
+text-transform: uppercase;
+}
+
+.particle {
+position: fixed;
+pointer-events: none;
+font-size: 1rem;
+animation: burst 1s ease-out forwards;
+}
+@keyframes burst {
+0%   { opacity: 1; transform: translate(0,0) scale(1); }
+100% { opacity: 0; transform: translate(var(–tx), var(–ty)) scale(0.3); }
+}
+</style>
+
+</head>
+<body>
+
+<div class="petals" id="petals"></div>
+<div class="glow"></div>
+
+<div class="card">
+  <div class="corners">
+    <span></span><span></span><span></span><span></span>
+  </div>
+
+<span class="moon">☾</span>
+
+  <h1>Eid Al-Adha</h1>
+  <h2>Mubarak</h2>
+  <div class="byname">by Asmaa</div>
+
+  <div class="divider"><span>✦</span></div>
+
+  <p>
+    Wishing you and your family a beautiful Eid<br>
+    filled with warmth, love, and togetherness.<br><br>
+    May Allah accept your good deeds,<br>
+    and bring joy to every corner of your home.
+  </p>
+
+  <div class="tags">
+    <span>Peace</span>
+    <span>Blessings</span>
+    <span>Love</span>
+    <span>Gratitude</span>
+  </div>
+
+<button class="btn" id="celebrateBtn">Celebrate ✨</button>
+
+  <div class="closing">Taqabbal Allahu Minna Wa Minkum</div>
+</div>
+
+<script>
+  const petalsEl = document.getElementById('petals');
+  for (let i = 0; i < 30; i++) {
+    const s = document.createElement('span');
+    const size = Math.random() * 12 + 6;
+    s.style.cssText = `
+      width:${size}px; height:${size}px;
+      top:${Math.random()*100}%;
+      left:${Math.random()*100}%;
+      --d:${(Math.random()*4+2).toFixed(1)}s;
+      --o:${(Math.random()*0.4+0.1).toFixed(2)};
+      animation-delay:${(Math.random()*5).toFixed(1)}s;
+    `;
+    petalsEl.appendChild(s);
+  }
+
+  document.getElementById('celebrateBtn').addEventListener('click', function(e) {
+    const emojis = ['✨','🌸','⭐','💗','💫','🌷','✦'];
+    for (let i = 0; i < 18; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      const angle = (Math.PI * 2 / 18) * i;
+      const dist = 80 + Math.random() * 80;
+      p.style.cssText = `
+        left:${e.clientX}px; top:${e.clientY}px;
+        --tx:${Math.cos(angle)*dist}px;
+        --ty:${Math.sin(angle)*dist}px;
+        animation-delay:${Math.random()*0.15}s;
+      `;
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 1200);
+    }
+  });
+</script>
+
+</body>
+</html>
